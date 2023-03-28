@@ -1,14 +1,10 @@
 import './App.css';
+import { Header } from './Shared/Components/Header';
 
 function App() {
   return (
     <div className='app'>
-      <header className='app-header'>
-        <div id='header-title-logo'>
-          <img id='header-logo' src='/logo.svg' alt='header logo' />
-          <span id='header-title'>Github Org Explorer</span>
-        </div>
-      </header>
+      <Header />
     </div>
   );
 }
