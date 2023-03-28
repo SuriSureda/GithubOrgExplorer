@@ -1,0 +1,25 @@
+#org-count-title {
+  width: 100%;
+  text-align: center;
+
+  margin-top: 0;
+}
+
+#counter-info {
+  font-weight: bold;
+  font-size: 2em;
+  font-style: italic;
+}
+
+#counter-message {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+#counter-time {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.6rem;
+
+  font-weight: normal;
+}
