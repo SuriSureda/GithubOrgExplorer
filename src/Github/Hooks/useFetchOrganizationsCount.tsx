@@ -1,14 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useFetch } from '../../Shared/Hooks/useFetch';
+import { useAppState } from '../../Shared/Hooks/useAppState';
 
 const MS_INTERVAL = 60000;
 
 export const useFetchOrganizationsCount = (secondsInterval?: number) => {
+  const { githubToken } = useAppState();
   const { loading, data, fetch } = useFetch();
 
   useEffect(() => {
     const fetchCount = () => {
-      fetch({ url: 'https://api.github.com/search/users?q=type:org' });
+      fetch({
+        url: 'https://api.github.com/search/users?q=type:org',
+        headers: {
+          Authorization: githubToken ? `Bearer ${githubToken}` : '',
+        },
+      });
     };
 
     fetchCount();
@@ -16,7 +23,7 @@ export const useFetchOrganizationsCount = (secondsInterval?: number) => {
     return () => {
       clearInterval(interval);
     };
-  }, [fetch, secondsInterval]);
+  }, [fetch, secondsInterval, githubToken]);
 
   const fetchResult = {
     count: data?.total_count ?? -1,
