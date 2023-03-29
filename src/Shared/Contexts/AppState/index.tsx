@@ -1,9 +1,11 @@
 import { ReactNode, createContext, useState } from 'react';
 
 type AppStateContextValue = {
-  githubToken?: string;
-  updateToken: (newToken: string) => void;
-  clearToken: () => void;
+  github: {
+    token?: string;
+    updateToken: (newToken: string) => void;
+    clearToken: () => void;
+  };
 };
 
 type ProviderProps = {
@@ -11,9 +13,11 @@ type ProviderProps = {
 };
 
 const defaultContextValue: AppStateContextValue = {
-  githubToken: undefined,
-  updateToken: () => {},
-  clearToken: () => {},
+  github: {
+    token: undefined,
+    updateToken: () => {},
+    clearToken: () => {},
+  },
 };
 
 export const AppStateContext = createContext<AppStateContextValue>(defaultContextValue);
@@ -23,18 +27,18 @@ const { Provider } = AppStateContext;
 export const AppStateProvider: React.FC<ProviderProps> = ({ children }) => {
   const [githubToken, setGithubToken] = useState<string>();
 
-  const updateToken = (newToken: string) => {
-    setGithubToken(newToken);
-  };
-
-  const clearToken = () => {
-    setGithubToken(undefined);
+  const githubValue = {
+    token: githubToken,
+    updateToken: (newToken: string) => {
+      setGithubToken(newToken);
+    },
+    clearToken: () => {
+      setGithubToken(undefined);
+    },
   };
 
   const value = {
-    githubToken,
-    updateToken,
-    clearToken,
+    github: githubValue,
   };
 
   return <Provider value={value}>{children}</Provider>;

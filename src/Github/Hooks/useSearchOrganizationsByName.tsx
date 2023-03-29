@@ -20,7 +20,7 @@ export const useSearchOrganizationsByName = (nameToSearch: string) => {
   const [page, setPage] = useState(1);
   const { data, loading, fetch, response } = useFetch();
 
-  const { githubToken } = useAppState();
+  const { github } = useAppState();
 
   const searchResult: SearchResult = {
     totalCount: data?.total_count ?? -1,
@@ -46,11 +46,11 @@ export const useSearchOrganizationsByName = (nameToSearch: string) => {
         url,
         headers: {
           Accept: 'application/vnd.github+json',
-          Authorization: githubToken ? `Bearer ${githubToken}` : '',
+          Authorization: github.token ? `Bearer ${github.token}` : '',
         },
       });
     }
-  }, [url, fetch, githubToken]);
+  }, [url, fetch, github.token]);
 
   const pagesRemaining = getPagesRemaining(response);
 
