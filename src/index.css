@@ -8,6 +8,39 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+}
+
+input {
+  border: 0;
+  outline: 0;
+  border-bottom: 2px solid gray;
+}
+
+button {
+  border: 0;
+  padding: 0.5rem;
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+}
+
+button:disabled {
+  border: 0;
+  padding: 0.5rem;
+  border-radius: 10px;
+  background-color: rgb(233, 233, 233);
+  color: rgb(117, 117, 117);
+}
+
+input:focus {
+  border-bottom: 2px solid black;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
