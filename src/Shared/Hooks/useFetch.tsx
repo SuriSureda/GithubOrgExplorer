@@ -1,11 +1,12 @@
 import { useState, useCallback } from 'react';
 import { FetchRequest } from '../Types/FetchRequest';
 
-export const useFetch = (request: FetchRequest) => {
+export const useFetch = () => {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState<Response | null>(null);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async (request: FetchRequest) => {
     setLoading(true);
     try {
       const response = await fetch(request.url, {
@@ -13,15 +14,16 @@ export const useFetch = (request: FetchRequest) => {
         body: request.body,
         headers: request.headers,
       });
+      setResponse(response);
       const json = await response.json();
       setData(json);
     } catch (error) {
     } finally {
       setLoading(false);
     }
-  }, [request.url, request.method, request.body, request.headers]);
+  }, []);
 
-  return { data, loading, fetch: fetchData };
+  return { data, loading, fetch: fetchData, response };
 };
 
 export default useFetch;
