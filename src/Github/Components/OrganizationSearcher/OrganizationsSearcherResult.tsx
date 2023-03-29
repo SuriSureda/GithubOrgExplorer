@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 import { useSearchOrganizationsByName } from '../../Hooks/useSearchOrganizationsByName';
 import { OrganizationCard } from '../OrganizationCard';
 import './index.css';
@@ -21,12 +21,16 @@ export const OrganizationSearcherResults: React.FC<Props> = ({ nameToSearch }) =
   const { result, loading, prevButton, nextButton, page } = useSearchOrganizationsByName(nameToSearch);
   const { totalCount, organizations } = result;
 
+  const totalPages = useMemo(() => {
+    return Math.ceil(totalCount / 30);
+  }, [totalCount]);
+
   const header = (
     <OrganizationSearcherResultsHeader count={totalCount}>
       <div id='org-searcher-results-buttons'>
         {prevButton}
         <span id='org-searcher-results-pagination'>
-          <span id='org-searcher-results-page'>{page}</span>/{Number(totalCount / 30).toFixed(0)}
+          <span id='org-searcher-results-page'>{totalCount === 0 ? 0 : page}</span>/{totalPages}
         </span>
         {nextButton}
       </div>
