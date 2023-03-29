@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from 'react';
 import { Card } from '../../../Shared/Components/Card';
 import useDebounce from '../../../Shared/Hooks/useDebounce';
+import { OrganizationSearcherResults } from './OrganizationsSearcherResult';
 import './index.css';
-import { OrganizationSearcherResults } from './OrganizationSearcherResults';
 
 const placeholder = 'Organization name';
 
@@ -31,7 +31,7 @@ export const OrganizationSearcher: React.FC = () => {
           placeholder='Organization name'
         />
       </div>
-      <div id='org-searcher-result'>{/* <OrganizationSearcherResults nameToSearch={nameToSearch} /> */}</div>
+      <div id='org-searcher-result'>{<OrganizationSearcherResults nameToSearch={nameToSearch} />}</div>
     </Card>
   );
 };
