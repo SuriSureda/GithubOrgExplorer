@@ -1,0 +1,46 @@
+#org-searcher {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 1rem;
+}
+
+#org-searcher-search {
+  text-align: center;
+}
+
+#org-searcher-input {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#org-searcher-loading-results {
+  width: 100%;
+  padding: 0.5rem;
+  font: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+#org-searcher-no-results {
+  width: 100%;
+  padding: 0.5rem;
+  font: 1.1rem;
+  text-align: center;
+}
+
+#org-searcher > * {
+  flex: 1;
+}
+
+#org-searcher-grid {
+  background-color: whitesmoke;
+  padding: 20px;
+  border-radius: 10px;
+
+  display: grid;
+  gap: 0.5rem;
+
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+}
