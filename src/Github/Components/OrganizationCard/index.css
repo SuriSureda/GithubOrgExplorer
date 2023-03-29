@@ -1,0 +1,13 @@
+.organization-avatar {
+  width: 4rem;
+  height: 4rem;
+}
+
+.organization-name {
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.organization-card {
+  width: 40px;
+}
