@@ -4,4 +4,5 @@ export type Organization = {
   avatar_url: string;
   repos_url: string;
   url: string;
+  html_url: string;
 };
