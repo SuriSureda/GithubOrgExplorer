@@ -26,7 +26,7 @@ export const OrganizationSearcherResults: React.FC<Props> = ({ nameToSearch }) =
   }, [totalCount]);
 
   const header = (
-    <OrganizationSearcherResultsHeader count={totalCount}>
+    <OrganizationSearcherResultsHeader count={!nameToSearch ? -1 : totalCount}>
       <div id='org-searcher-results-buttons'>
         {prevButton}
         <span id='org-searcher-results-pagination'>
