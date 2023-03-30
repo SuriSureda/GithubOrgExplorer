@@ -1,46 +1,71 @@
-# Getting Started with Create React App
+# Github Org Explorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Github Org Explorer is a React web application that allows users to search for organizations on Github by name and view their public repositories. Additionally, the app provides information on how many organizations there are on Github.
 
-## Available Scripts
+This application was developed as part of a job application for Trifork.
 
-In the project directory, you can run:
+## Test functionalities
 
-### `npm start`
+#### ✅ 1. Given an organization return the number of repositories. (TF1)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### ✅ 2. Given an organization return the biggest repository (in bytes). (TF2)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### ✅ 3. Return the number of organizations that are currently on Github. (TF3)
 
-### `npm test`
+## Technologies used
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Docker
+- React
+- Typescript
+- Node.js (18.14)
 
-### `npm run build`
+## How to run it
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+There are two options to run this application. The first and most recommended is Docker. Alternatively, you can use a local Node installation.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### First step (common to both ways)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Option 1 : Clone the repository (recommended)
 
-### `npm run eject`
+`git clone https://github.com/SuriSureda/GithubOrgExplorer.git`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Option 2 : Download source code
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+[Download this repository](https://github.com/SuriSureda/GithubOrgExplorer/archive/refs/heads/main.zip) and extract the .zip
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Docker (recommended)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. Build the image with `docker build . -t <image-name>`
+2. Run the container with `docker run -p <port>:3000 --name <container-name> -d <image-name>`
+3. Open http://localhost:\<port\> to view it in the browser
 
-## Learn More
+### Node.js
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Install all the dependencies with `npm install`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Production environment
+
+2. Build the application with `npm run build`
+3. Start the production server with `npx serve build`
+4. Open http://localhost:3000 to view it in the browser
+
+#### Development environment
+
+2. Run the app with `npm start`
+3. Open http://localhost:3000 to view it in the browser
+
+## Usage
+
+To use the app, simply enter the name of an organization in the search bar. The app will display a list of organizations that match the search term.
+
+![](images/searcher.gif)
+
+Click on an organization to view detailed information about it: number of repositories [TF1](#✅-1-given-an-organization-return-the-number-of-repositories-tf1) and listed repositories sorted by descending size [TF2](#✅-2-given-an-organization-return-the-biggest-repository-in-bytes-tf2).
+
+![](images/modal.gif)
+
+It also provides, at real time, how many organizations there are currently on Github [TF3](#✅-3-return-the-number-of-organizations-that-are-currently-on-github-tf3). It fetches the API every minute.
+
+![](images/counter.gif)
+
+Due to some limitatios with anonymous calls to the Github API is it posible to provide an API key to use on the calls.
