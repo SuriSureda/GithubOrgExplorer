@@ -1,0 +1,25 @@
+.organization-repo-link {
+  color: white;
+  background-color: black;
+
+  padding: 5px 10px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.organization-repo-name {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.organization-repo-description {
+  font-size: 0.9em;
+}
+
+.organization-repo-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 1rem;
+}
