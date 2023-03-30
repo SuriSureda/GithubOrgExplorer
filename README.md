@@ -60,12 +60,12 @@ To use the app, simply enter the name of an organization in the search bar. The 
 
 ![](images/searcher.gif)
 
-Click on an organization to view detailed information about it: number of repositories [TF1](#✅-1-given-an-organization-return-the-number-of-repositories-tf1) and listed repositories sorted by descending size [TF2](#✅-2-given-an-organization-return-the-biggest-repository-in-bytes-tf2).
+Click on an organization to view detailed information about it: number of repositories [(TF1)](#✅-1-given-an-organization-return-the-number-of-repositories-tf1) and listed repositories sorted by descending size [(TF2)](#✅-2-given-an-organization-return-the-biggest-repository-in-bytes-tf2).
 
 ![](images/modal.gif)
 
-It also provides, at real time, how many organizations there are currently on Github [TF3](#✅-3-return-the-number-of-organizations-that-are-currently-on-github-tf3). It fetches the API every minute.
+It also provides, at real time, how many organizations there are currently on Github [(TF3)](#✅-3-return-the-number-of-organizations-that-are-currently-on-github-tf3). It fetches the API every minute.
 
 ![](images/counter.gif)
 
-Due to some limitatios with anonymous calls to the Github API is it posible to provide an API key to use on the calls.
+Due to limitations with anonymous calls to the Github API, it is possible that the app may stop working. To avoid or delay this error, it is recommended to provide a Github token to use in API calls.
