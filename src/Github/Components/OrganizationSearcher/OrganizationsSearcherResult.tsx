@@ -1,6 +1,9 @@
-import { ReactNode, useMemo } from 'react';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { useSearchOrganizationsByName } from '../../Hooks/useSearchOrganizationsByName';
 import { OrganizationCard } from '../OrganizationCard';
+import { Organization } from '../../Domain/Organization';
+import { OrganizationModal } from '../OrganizationModal';
+
 import './index.css';
 
 type Props = {
@@ -20,6 +23,17 @@ const OrganizationSearcherResultsHeader: React.FC<{ count: number; children: Rea
 export const OrganizationSearcherResults: React.FC<Props> = ({ nameToSearch }) => {
   const { result, loading, prevButton, nextButton, page } = useSearchOrganizationsByName(nameToSearch);
   const { totalCount, organizations } = result;
+
+  const [selectedOrg, setSelectedOrg] = useState<Organization>();
+
+  const selectOrganization = (org: Organization) => {
+    setSelectedOrg(org);
+  };
+
+  // on change nameToSearch unselect org
+  useEffect(() => {
+    setSelectedOrg(undefined);
+  }, [nameToSearch]);
 
   const totalPages = useMemo(() => {
     return Math.ceil(totalCount / 30);
@@ -42,14 +56,16 @@ export const OrganizationSearcherResults: React.FC<Props> = ({ nameToSearch }) =
       return <div id='org-searcher-loading-results'>Loading results...</div>;
     }
 
-    if (totalCount === -1) {
+    if (totalCount === -1 || !nameToSearch) {
       return <div id='org-searcher-no-results'>Please enter the organization name to search</div>;
     }
 
     return (
       <div id='org-searcher-grid'>
         {organizations.map((org) => (
-          <OrganizationCard key={org.id} organization={org} />
+          <div key={org.id} className='org-card-clickable' onClick={() => selectOrganization(org)}>
+            <OrganizationCard organization={org} />
+          </div>
         ))}
       </div>
     );
@@ -59,6 +75,7 @@ export const OrganizationSearcherResults: React.FC<Props> = ({ nameToSearch }) =
     <div>
       {header}
       {content}
+      <OrganizationModal organization={selectedOrg} onClose={() => setSelectedOrg(undefined)} />
     </div>
   );
 };
