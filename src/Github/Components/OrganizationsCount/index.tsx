@@ -15,7 +15,7 @@ const getTimeInfo = (timestamp: Date) => {
 };
 
 export const OrganizationsCount: React.FC = () => {
-  const { count, timestamp } = useFetchOrganizationsCount(20);
+  const { count, timestamp } = useFetchOrganizationsCount(60);
 
   const content =
     count === -1 || count == null ? (
