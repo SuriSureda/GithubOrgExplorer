@@ -68,4 +68,6 @@ It also provides, at real time, how many organizations there are currently on Gi
 
 ![](images/counter.gif)
 
-Due to limitations with anonymous calls to the Github API, it is possible that the app may stop working. To avoid or delay this error, it is recommended to provide a Github token to use in API calls.
+Due to some limitations with anonymous calls to the Github API, it is possible that the app may stop working. To avoid or delay this error, it is recommended to provide a Github token to use in API calls. If a token with the corresponding rights to the organization being searched for is provided, more information will be provided about its repositories.
+
+![](images/ownerOrg.jpg)
