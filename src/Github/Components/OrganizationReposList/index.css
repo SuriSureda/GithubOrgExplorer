@@ -16,6 +16,11 @@
   font-style: italic;
 }
 
+.organization-repost-list-counter-info {
+  font-style: normal;
+  font-size: 1.1em;
+}
+
 .organization-repos-list-wrapper {
   display: flex;
   flex-direction: column;

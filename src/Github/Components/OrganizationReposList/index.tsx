@@ -8,12 +8,31 @@ type Props = {
   organization?: Organization;
 };
 
+const reposCountInfo = ({ privateCount, publicCount }: { privateCount?: number; publicCount?: number }) => {
+  if (!privateCount && !publicCount) return;
+
+  const privateReposText = privateCount ? `🔒: ${privateCount}` : '';
+  const publicReposText = publicCount ? `🌍: ${publicCount}` : '';
+
+  return `${publicReposText} ${privateReposText}`;
+};
+
 export const OrganizationReposList: React.FC<Props> = ({ organization }) => {
   const { organizationRepos, loading } = useFetchOrganizationRepos(organization?.login);
 
   const sortedReposeBySize = useMemo(() => {
     if (!organizationRepos) return null;
     return organizationRepos.sort((repoA, repoB) => repoB.size - repoA.size);
+  }, [organizationRepos]);
+
+  const reposInfo = useMemo(() => {
+    if (!organizationRepos) return {};
+    const privateRepos = organizationRepos.filter((repo) => repo.private);
+
+    return {
+      privateCount: privateRepos.length,
+      publicCount: organizationRepos.length - privateRepos.length,
+    };
   }, [organizationRepos]);
 
   if (!organization || !sortedReposeBySize) return null;
@@ -32,9 +51,7 @@ export const OrganizationReposList: React.FC<Props> = ({ organization }) => {
         <h4>
           Repositories List <span className='organization-repos-list-header-explanation'>(sorted by size)</span>
         </h4>
-        <span className='organization-repost-list-counter'>
-          Found: <strong>{sortedReposeBySize.length} repositories</strong>
-        </span>
+        <span className='organization-repost-list-counter-info'>{reposCountInfo(reposInfo)}</span>
       </div>
       <ul className='organization-repos-list'>
         {sortedReposeBySize.map((orgRepo) => (
