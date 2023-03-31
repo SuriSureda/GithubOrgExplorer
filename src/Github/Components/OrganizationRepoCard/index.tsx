@@ -21,7 +21,10 @@ export const OrganizationRepoCard: React.FC<Props> = ({ repository }) => {
   return (
     <Card>
       <div className='organization-repo-card'>
-        <h3 className='organization-repo-name'>{repository.name}</h3>
+        <h3 className='organization-repo-name'>
+          {repository.name}
+          {repository.private ? ' 🔒' : ''}
+        </h3>
         <span className='organization-repo-description'>{repository.description}</span>
         <br />
         <div className='organization-repo-footer'>
