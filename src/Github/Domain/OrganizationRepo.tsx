@@ -4,4 +4,5 @@ export type OrganizationRepo = {
   description: string;
   size: number;
   html_url: string;
+  private: boolean;
 };
