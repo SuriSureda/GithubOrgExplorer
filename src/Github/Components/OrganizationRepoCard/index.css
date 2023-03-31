@@ -14,6 +14,7 @@
 
 .organization-repo-description {
   font-size: 0.9em;
+  word-break: break-all;
 }
 
 .organization-repo-footer {
