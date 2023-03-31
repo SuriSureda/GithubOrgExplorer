@@ -8,7 +8,7 @@ export const useFetchOrganizationRepos = (orgName?: string) => {
   const { data, fetch, response, loading: fetchLoading } = useFetch();
 
   const [page, setPage] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [repos, setRepos] = useState<OrganizationRepo[]>();
 
@@ -18,14 +18,17 @@ export const useFetchOrganizationRepos = (orgName?: string) => {
       setRepos(undefined);
       return;
     }
-    setLoading(true);
     setPage(1);
+
+    return () => {
+      setRepos(undefined);
+    };
   }, [orgName]);
 
   useEffect(() => {
     if (fetchLoading || page === 0) return;
     fetch({
-      url: `https://api.github.com/orgs/${orgName}/repos?page=${page}`,
+      url: `https://api.github.com/orgs/${orgName}/repos?type=all&page=${page}`,
       headers: {
         Authorization: github.token ? `Bearer ${github.token}` : '',
       },
