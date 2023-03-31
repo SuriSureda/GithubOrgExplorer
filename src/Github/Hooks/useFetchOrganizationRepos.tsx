@@ -16,13 +16,10 @@ export const useFetchOrganizationRepos = (orgName?: string) => {
     if (!orgName) {
       setPage(0);
       setRepos(undefined);
+      setLoading(true);
       return;
     }
     setPage(1);
-
-    return () => {
-      setRepos(undefined);
-    };
   }, [orgName]);
 
   useEffect(() => {

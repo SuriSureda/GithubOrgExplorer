@@ -35,9 +35,9 @@ export const OrganizationReposList: React.FC<Props> = ({ organization }) => {
     };
   }, [organizationRepos]);
 
-  if (!organization || !sortedReposeBySize) return null;
+  if (!organization) return null;
 
-  if (loading) {
+  if (loading || !sortedReposeBySize) {
     return (
       <div>
         <h4>Loading organization repositories...</h4>
