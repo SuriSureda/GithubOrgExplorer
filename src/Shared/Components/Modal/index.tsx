@@ -1,4 +1,5 @@
-import { MouseEventHandler, ReactNode, useEffect, useRef } from 'react';
+import { MouseEventHandler, ReactNode, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useSpring, animated } from 'react-spring';
 
 import './index.css';
@@ -35,7 +36,7 @@ export const Modal: React.FC<Props> = ({ showModal, onClose, closeOnClickOutside
     onClose();
   };
 
-  return (
+  return createPortal(
     <animated.div style={animation} className='modal-overlay' ref={overlayRef} onClick={closeOnClickOutside ? handleClickOverlay : undefined}>
       <div className='modal-wrapper'>
         <div className='modal-header'>
@@ -45,6 +46,7 @@ export const Modal: React.FC<Props> = ({ showModal, onClose, closeOnClickOutside
         </div>
         <div className='modal-content'>{children}</div>
       </div>
-    </animated.div>
+    </animated.div>,
+    document.body
   );
 };
