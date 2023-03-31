@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const OrganizationReposList: React.FC<Props> = ({ organization }) => {
-  const { organizationRepos, loading } = useFetchOrganizationRepos(organization?.repos_url);
+  const { organizationRepos, loading } = useFetchOrganizationRepos(organization?.login);
 
   const sortedReposeBySize = useMemo(() => {
     if (!organizationRepos) return null;
