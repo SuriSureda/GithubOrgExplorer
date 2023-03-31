@@ -4,12 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AppStateProvider } from './Shared/Contexts/AppState';
+import { ToastNotificationHandler } from './Shared/Components/ToastNotifications/ToastNotificationHandler';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <AppStateProvider>
       <App />
+      <ToastNotificationHandler />
     </AppStateProvider>
   </React.StrictMode>
 );
