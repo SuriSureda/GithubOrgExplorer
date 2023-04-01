@@ -37,7 +37,7 @@ There are two options to run this application. The first and most recommended is
 
 1. Build the image with `docker build . -t <image-name>`
 2. Run the container with `docker run -p <port>:3000 --name <container-name> -d <image-name>`
-3. Open http://localhost:\<port\> to view it in the browser. (The server may take some seconds to init)
+3. Open http://localhost:<port\> to view it in the browser. (The server may take some seconds to init)
 
 ### Node.js
 
