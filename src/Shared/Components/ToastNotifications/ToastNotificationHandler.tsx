@@ -1,11 +1,10 @@
 import { createPortal } from 'react-dom';
-import { useAppState } from '../../Hooks/useAppState';
 import { ToastNotification } from './ToastNotification';
 import './index.css';
+import { useNotifications } from '../../Hooks/useNotifications';
 
 export const ToastNotificationHandler = () => {
-  const { notifications: notificationsState } = useAppState();
-  const { notifications } = notificationsState;
+  const { notifications } = useNotifications();
 
   return createPortal(
     <div className='toasts-wrapper'>
