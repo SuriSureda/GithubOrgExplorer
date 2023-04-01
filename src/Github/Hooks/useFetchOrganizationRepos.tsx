@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useFetch } from '../../Shared/Hooks/useFetch';
-import { useAppState } from '../../Shared/Hooks/useAppState';
 import { OrganizationRepo } from '../Domain/OrganizationRepo';
+import { useFetchGithub } from './useFetchGithub';
 
 export const useFetchOrganizationRepos = (orgName?: string) => {
-  const { github } = useAppState();
-  const { data, fetch, response, loading: fetchLoading } = useFetch();
+  const { data, fetch, response, loading: fetchLoading } = useFetchGithub();
 
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -25,12 +23,13 @@ export const useFetchOrganizationRepos = (orgName?: string) => {
   useEffect(() => {
     if (fetchLoading || page === 0) return;
     fetch({
-      url: `https://api.github.com/orgs/${orgName}/repos?type=all&page=${page}`,
-      headers: {
-        Authorization: github.token ? `Bearer ${github.token}` : '',
+      path: `orgs/${orgName}/repos`,
+      params: {
+        type: 'all',
+        page: page,
       },
     });
-  }, [github.token, fetch, page, orgName, fetchLoading]);
+  }, [fetch, page, orgName, fetchLoading]);
 
   useEffect(() => {
     if (data) {

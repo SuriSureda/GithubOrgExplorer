@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useFetch } from '../../Shared/Hooks/useFetch';
 import { Organization } from '../Domain/Organization';
-import { useAppState } from '../../Shared/Hooks/useAppState';
+import { useFetchGithub } from './useFetchGithub';
 
 type SearchResult = {
   totalCount: number;
@@ -18,20 +17,21 @@ const getPagesRemaining = (response: Response | null) => {
 
 export const useSearchOrganizationsByName = (nameToSearch: string) => {
   const [page, setPage] = useState(1);
-  const { data, loading, fetch, response } = useFetch();
-
-  const { github } = useAppState();
+  const { data, loading, fetch, response } = useFetchGithub();
 
   const searchResult: SearchResult = {
     totalCount: data?.total_count ?? -1,
     organizations: data?.items ?? [],
   };
 
-  const url = useMemo(() => {
+  const params = useMemo(() => {
     if (!nameToSearch) {
-      return '';
+      return undefined;
     }
-    return `https://api.github.com/search/users?q=${nameToSearch} in:login type:org&page=${page}`;
+    return {
+      q: `${nameToSearch} in:login type:org`,
+      page: page,
+    };
   }, [page, nameToSearch]);
 
   //on change name -> init page
@@ -41,16 +41,16 @@ export const useSearchOrganizationsByName = (nameToSearch: string) => {
 
   // on update url -> search
   useEffect(() => {
-    if (url) {
+    if (params) {
       fetch({
-        url,
+        path: 'search/users',
+        params: params,
         headers: {
           Accept: 'application/vnd.github+json',
-          Authorization: github.token ? `Bearer ${github.token}` : '',
         },
       });
     }
-  }, [url, fetch, github.token]);
+  }, [params, fetch]);
 
   const pagesRemaining = getPagesRemaining(response);
 
