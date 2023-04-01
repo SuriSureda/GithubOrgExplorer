@@ -1,5 +1,7 @@
 export type Notification = {
   key: string;
+  title: string;
   message: string;
-  duration: number;
+  type: 'ERROR' | 'INFO';
+  duration?: number;
 };

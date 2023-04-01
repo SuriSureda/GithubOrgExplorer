@@ -7,11 +7,16 @@ type Props = {
   notification: Notification;
 };
 
+const icons = {
+  ERROR: '🚨',
+  INFO: 'ℹ️',
+};
+
 export const ToastNotification: React.FC<Props> = ({ notification }) => {
   const { notifications } = useAppState();
   const { close } = notifications;
 
-  const { key, duration } = notification;
+  const { key, duration = 5 } = notification;
 
   useEffect(() => {
     if (duration === 0) return;
@@ -21,5 +26,14 @@ export const ToastNotification: React.FC<Props> = ({ notification }) => {
     };
   }, [key, duration, close]);
 
-  return <div className='toast-notification'>{notification.message}</div>;
+  return (
+    <div className='toast-notification'>
+      <strong>
+        {`${icons[notification.type]} ` ?? ''}
+        {notification.title}
+      </strong>
+      <br />
+      {notification.message}
+    </div>
+  );
 };
